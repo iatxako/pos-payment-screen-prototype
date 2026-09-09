@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#0d0d10}
+a{color:rgb(7,37,80)}a:hover{color:rgb(98,118,155)}
+@keyframes dropUp{from{transform:translateY(24px) scale(.98);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideIn{from{transform:translateX(40px);opacity:0}to{transform:translateX(0);opacity:1}}
+</style>
+</helmet>
+<div style="position:relative;width:720px;height:1600px;overflow:hidden;background-color:rgb(243,246,254);font-family:Inter,system-ui,sans-serif;color:rgb(7,37,80);user-select:none;-webkit-font-smoothing:antialiased">
+
+  <sc-if value="{{ onCharge }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0">
+
+      <div style="position:absolute;left:60px;top:290px;width:600px;display:flex;flex-direction:column;align-items:center;gap:24px">
+        <span style="font-weight:700;font-size:49.1949px;line-height:1.5;white-space:nowrap">{{ t.enterAmount }}</span>
+        <span style="font-weight:800;font-size:104px;line-height:1.2;white-space:nowrap">{{ display }}</span>
+      </div>
+
+      <div style="position:absolute;left:60px;top:735px;width:600px;display:grid;grid-template-columns:repeat(3,188px);grid-auto-rows:107px;gap:24px 17px">
+        <sc-for list="{{ keys }}" as="k" hint-placeholder-count="12">
+          <div onClick="{{ k.onPress }}" style="border-radius:20.1619px;background:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);display:flex;align-items:center;justify-content:center;transition:transform .12s ease,background .12s ease;cursor:{{ k.cursor }}">
+            <sc-if value="{{ k.isInert }}">
+              <span style="font-weight:800;font-size:44px;line-height:1;color:rgb(98,118,155)">{{ k.label }}</span>
+            </sc-if>
+            <sc-if value="{{ k.isDigit }}" hint-placeholder-val="{{ true }}">
+              <span style="font-weight:800;font-size:44px;line-height:1">{{ k.label }}</span>
+            </sc-if>
+            <sc-if value="{{ k.isBack }}">
+              <svg width="42" height="32" viewBox="0 0 42 32" fill="none">
+                <path d="M14 3H38C39.657 3 41 4.343 41 6V26C41 27.657 39.657 29 38 29H14L1 16L14 3Z" fill="rgb(7,37,80)"></path>
+                <path d="M20 11L30 21M30 11L20 21" stroke="rgb(255,255,255)" stroke-width="3" stroke-linecap="round"></path>
+              </svg>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="position:absolute;left:60px;top:1304px;width:600px;height:90px;display:flex;flex-direction:row;gap:15px;align-items:stretch">
+        <div onClick="{{ onContinue }}" style="flex:1;border-radius:20.1619px;background:{{ continueBg }};display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .14s ease" style-active="transform:scale(.99)">
+          <span style="font-weight:600;font-size:28px;color:rgb(255,255,255)">{{ t.continue }}</span>
+        </div>
+        <div onClick="{{ onToggleTools }}" style="width:86px;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:transform .14s ease,background .14s ease" style-active="transform:scale(.97);background:rgb(237,242,252)">
+          <div style="width:7px;height:7px;border-radius:50%;background:rgb(7,37,80)"></div>
+          <div style="width:7px;height:7px;border-radius:50%;background:rgb(7,37,80)"></div>
+          <div style="width:7px;height:7px;border-radius:50%;background:rgb(7,37,80)"></div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ onManage }}">
+    <div style="position:absolute;left:0;top:0;width:720px;height:1441px;overflow:hidden;animation:fadeIn .2s ease both">
+      <div style="position:absolute;left:60px;top:96px;width:600px;display:flex;flex-direction:column;gap:8px">
+        <span style="font-weight:700;font-size:49.1949px;line-height:1.3">{{ t.manage }}</span>
+        <span style="font-weight:500;font-size:24px;line-height:1.5;color:rgb(98,118,155)">{{ merchant }}</span>
+      </div>
+
+      <div style="position:absolute;left:60px;top:250px;width:600px;height:1140px;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;gap:32px">
+        <sc-for list="{{ manageGroups }}" as="g" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font-weight:600;font-size:20px;line-height:1.5;letter-spacing:.04em;text-transform:uppercase;color:rgb(98,118,155)">{{ g.title }}</span>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="3">
+                <div onClick="{{ it.onOpen }}" style="height:104px;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);display:flex;flex-direction:row;align-items:center;gap:20px;padding:0 28px;box-sizing:border-box;cursor:pointer;transition:transform .14s ease,background .14s ease" style-active="transform:scale(.995);background:rgb(248,250,255)">
+                  <div style="width:56px;height:56px;border-radius:16px;background:rgb(237,242,252);display:flex;align-items:center;justify-content:center;flex-shrink:0">{{ it.icon }}</div>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0">
+                    <span style="font-weight:600;font-size:26px;line-height:1.3">{{ it.label }}</span>
+                    <span style="font-weight:500;font-size:19px;line-height:1.4;color:rgb(98,118,155)">{{ it.hint }}</span>
+                  </div>
+                  <svg width="14" height="24" viewBox="0 0 14 24" fill="none" style="flex-shrink:0">
+                    <path d="M2 2L11 12L2 22" stroke="rgb(98,118,155)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+        <div style="height:8px;flex-shrink:0"></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ toolsOpen }}">
+    <div onClick="{{ onToggleTools }}" style="position:absolute;inset:0;background:rgba(7,37,80,.14);animation:fadeIn .16s ease both"></div>
+    <div style="position:absolute;left:60px;top:530px;width:600px;border-radius:24px;background:rgb(255,255,255);box-shadow:0px 12px 40px 0px rgba(11,48,100,.18);padding:16px;box-sizing:border-box;display:flex;flex-direction:column;gap:4px;transform-origin:bottom right;animation:dropUp .26s cubic-bezier(.22,1,.36,1) both">
+      <sc-for list="{{ tools }}" as="tool" hint-placeholder-count="6">
+        <div onClick="{{ tool.onPick }}" style="height:96px;border-radius:16px;display:flex;flex-direction:row;align-items:center;gap:20px;padding:0 16px;box-sizing:border-box;cursor:pointer;transition:background .14s ease" style-hover="background:rgb(243,246,254)" style-active="background:rgb(237,242,252)">
+          <div style="width:52px;height:52px;border-radius:14px;background:rgb(237,242,252);display:flex;align-items:center;justify-content:center;flex-shrink:0">{{ tool.icon }}</div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:2px;min-width:0">
+            <span style="font-weight:600;font-size:25px;line-height:1.3">{{ tool.label }}</span>
+            <span style="font-weight:500;font-size:18px;line-height:1.4;color:rgb(98,118,155)">{{ tool.hint }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ toastOpen }}">
+    <div style="position:absolute;left:60px;top:180px;width:600px;border-radius:20.1619px;background:rgb(7,37,80);padding:24px 28px;box-sizing:border-box;display:flex;align-items:center;gap:16px;animation:slideIn .24s cubic-bezier(.22,1,.36,1) both">
+      <span style="font-weight:600;font-size:24px;line-height:1.4;color:rgb(255,255,255)">{{ toast }}</span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ onCharge }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;left:32px;top:1441px;width:656px;height:1px;background:rgba(7,37,80,.1)"></div>
+  </sc-if>
+  <sc-if value="{{ onManage }}">
+    <div style="position:absolute;left:32px;top:1441px;width:656px;height:1px;background:rgba(7,37,80,.1)"></div>
+  </sc-if>
+
+  <sc-if value="{{ navVisible }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;left:0;top:1442px;width:720px;height:158px;display:flex;flex-direction:row;align-items:stretch">
+      <div onClick="{{ goCharge }}" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer">
+        <svg width="52" height="42" viewBox="0 0 52 42" fill="none">
+          <rect x="2.5" y="2.5" width="47" height="37" rx="6" stroke="{{ chargeInk }}" stroke-width="4"></rect>
+          <path d="M2.5 15H49.5" stroke="{{ chargeInk }}" stroke-width="4"></path>
+          <path d="M11 27H22" stroke="{{ chargeInk }}" stroke-width="4" stroke-linecap="round"></path>
+        </svg>
+        <span style="font-weight:500;font-size:22px;line-height:1.4;color:{{ chargeInk }}">{{ t.charge }}</span>
+        <div style="width:88px;height:5px;border-radius:3px;background:{{ chargeUnderline }}"></div>
+      </div>
+      <div style="width:1px;margin:38px 0;background:rgba(7,37,80,.1)"></div>
+      <div onClick="{{ goManage }}" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none">
+          <path d="M10.32 2.5h3.36l.45 2.34a7.5 7.5 0 011.72 1l2.24-.81 1.68 2.91-1.79 1.55a7.6 7.6 0 010 1.99l1.79 1.55-1.68 2.91-2.24-.81a7.5 7.5 0 01-1.72 1l-.45 2.34h-3.36l-.45-2.34a7.5 7.5 0 01-1.72-1l-2.24.81-1.68-2.91 1.79-1.55a7.6 7.6 0 010-1.99L4.23 7.94l1.68-2.91 2.24.81a7.5 7.5 0 011.72-1l.45-2.34z" stroke="{{ manageInk }}" stroke-width="2" stroke-linejoin="round"></path>
+          <circle cx="12" cy="12" r="3.1" stroke="{{ manageInk }}" stroke-width="2"></circle>
+        </svg>
+        <span style="font-weight:500;font-size:22px;line-height:1.4;color:{{ manageInk }}">{{ t.manage }}</span>
+        <div style="width:88px;height:5px;border-radius:3px;background:{{ manageUnderline }}"></div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ onPayment }}">
+    <div style="position:absolute;inset:0;background:rgb(243,246,254);animation:fadeIn .2s ease both">
+      <dc-import name="POS Payment Screen v2" amount="{{ chargedAmount }}" language="{{ language }}" outcome="{{ outcome }}" on-done="{{ onPaymentDone }}" hint-size="720px,1600px" style="position:absolute;left:0;top:0;width:720px;height:1600px"></dc-import>
+      <div onClick="{{ goCharge }}" style="position:absolute;left:24px;top:24px;height:64px;border-radius:16px;background:rgba(255,255,255,.92);box-shadow:0px 4px 16px 0px rgba(11,48,100,.16);display:flex;align-items:center;gap:12px;padding:0 24px;cursor:pointer;z-index:5">
+        <svg width="14" height="24" viewBox="0 0 14 24" fill="none">
+          <path d="M12 2L3 12L12 22" stroke="rgb(7,37,80)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span style="font-weight:600;font-size:22px;color:rgb(7,37,80)">{{ t.back }}</span>
+      </div>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:720,&quot;height&quot;:1600},&quot;language&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;es&quot;,&quot;en&quot;],&quot;default&quot;:&quot;es&quot;,&quot;tsType&quot;:&quot;\&quot;es\&quot; | \&quot;en\&quot;&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;merchant&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Cafetería Nou Barris · Terminal 02&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;outcome&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ok&quot;,&quot;ko&quot;],&quot;default&quot;:&quot;ok&quot;,&quot;tsType&quot;:&quot;\&quot;ok\&quot; | \&quot;ko\&quot;&quot;,&quot;section&quot;:&quot;Comportamiento&quot;}}">
+const ICON = {
+  refund: { d: "M8 14H26C30.418 14 34 17.582 34 22C34 26.418 30.418 30 26 30H14", box: 40 },
+  receipt: null
+};
+
+function svg(paths, opts) {
+  const o = opts || {};
+  return React.createElement(
+    "svg",
+    { width: o.w || 30, height: o.h || 30, viewBox: o.vb || "0 0 30 30", fill: "none" },
+    paths.map((p, i) =>
+      React.createElement(p.tag || "path", Object.assign({ key: i, stroke: p.fill ? undefined : "rgb(7,37,80)", strokeWidth: p.fill ? undefined : 2.4, strokeLinecap: "round", strokeLinejoin: "round", fill: p.fill || "none" }, p.attrs))
+    )
+  );
+}
+
+const P = {
+  tip: [{ attrs: { d: "M15 3C15 3 8 11 8 17a7 7 0 0014 0c0-6-7-14-7-14z" } }],
+  refund: [{ attrs: { d: "M5 10h13a6 6 0 010 12h-8" } }, { attrs: { d: "M9 5L4 10l5 5" } }],
+  link: [{ attrs: { d: "M12 18l6-6" } }, { attrs: { d: "M9 15l-2 2a4.24 4.24 0 006 6l2-2" } }, { attrs: { d: "M21 15l2-2a4.24 4.24 0 00-6-6l-2 2" } }],
+  qr: [{ attrs: { d: "M4 4h8v8H4zM18 4h8v8h-8zM4 18h8v8H4z" } }, { attrs: { d: "M18 18h3v3h-3zM23 23h3v3h-3z" } }],
+  preauth: [{ attrs: { d: "M4 7h22v16H4z" } }, { attrs: { d: "M4 13h22" } }, { attrs: { d: "M8 19h6" } }],
+  note: [{ attrs: { d: "M7 4h12l5 5v17H7z" } }, { attrs: { d: "M11 14h10M11 19h7" } }],
+  printer: [{ attrs: { d: "M8 12V4h14v8" } }, { attrs: { d: "M22 20h4v-8H4v8h4" } }, { attrs: { d: "M8 17h14v9H8z" } }],
+  split: [{ attrs: { d: "M15 4v22" } }, { attrs: { d: "M6 11h6M18 11h6M6 19h6M18 19h6" } }],
+  history: [{ attrs: { d: "M15 6a9 9 0 109 9" } }, { attrs: { d: "M15 10v5l4 3" } }, { attrs: { d: "M24 6v5h-5" } }],
+  cancel: [{ attrs: { d: "M15 4a11 11 0 110 22 11 11 0 010-22z" } }, { attrs: { d: "M11 11l8 8M19 11l-8 8" } }],
+  close: [{ attrs: { d: "M4 24V9M11 24V5M18 24V13M25 24V7" } }],
+  report: [{ attrs: { d: "M6 4h18v22H6z" } }, { attrs: { d: "M10 11h10M10 16h10M10 21h6" } }],
+  cash: [{ attrs: { d: "M3 8h24v14H3z" } }, { attrs: { d: "M15 12a3 3 0 110 6 3 3 0 010-6z" } }],
+  shop: [{ attrs: { d: "M4 12l3-7h16l3 7" } }, { attrs: { d: "M5 12h20v14H5z" } }],
+  users: [{ attrs: { d: "M11 13a4 4 0 110-8 4 4 0 010 8z" } }, { attrs: { d: "M3 25c0-4.5 3.6-8 8-8s8 3.5 8 8" } }, { attrs: { d: "M20 6a4 4 0 010 8" } }, { attrs: { d: "M22 17c3 1 5 4 5 8" } }],
+  percent: [{ attrs: { d: "M7 23L23 7" } }, { attrs: { d: "M9 12a3 3 0 110-6 3 3 0 010 6zM21 24a3 3 0 110-6 3 3 0 010 6z" } }],
+  catalog: [{ attrs: { d: "M5 6h9v9H5zM16 6h9v9h-9zM5 17h9v7H5zM16 17h9v7h-9z" } }],
+  gear: [{ attrs: { d: "M15 11a4 4 0 110 8 4 4 0 010-8z" } }, { attrs: { d: "M15 3v3M15 24v3M4 15H1M29 15h-3M7.2 7.2L5 5M25 25l-2.2-2.2M22.8 7.2L25 5M5 25l2.2-2.2" } }],
+  wifi: [{ attrs: { d: "M3 11a17 17 0 0124 0" } }, { attrs: { d: "M8 16a11 11 0 0114 0" } }, { attrs: { d: "M12.5 21a5 5 0 015 0" } }],
+  update: [{ attrs: { d: "M15 5a10 10 0 019.5 7" } }, { attrs: { d: "M15 25a10 10 0 01-9.5-7" } }, { attrs: { d: "M25 5v7h-7M5 25v-7h7" } }],
+  help: [{ attrs: { d: "M15 3a12 12 0 110 24 12 12 0 010-24z" } }, { attrs: { d: "M12 12a3 3 0 116 1c0 2-3 2.5-3 4.5" } }, { attrs: { d: "M15 22h.01" } }]
+};
+
+const COPY = {
+  es: {
+    enterAmount: "Introduce importe",
+    continue: "Continuar",
+    charge: "Cobrar",
+    manage: "Gesti\u00f3n",
+    back: "Volver",
+    needAmount: "Introduce un importe para continuar",
+    soon: "Disponible en el prototipo completo",
+    tools: [
+      ["tip", "A\u00f1adir propina", "Sugerencias en pantalla del cliente"],
+      ["split", "Dividir el pago", "Cobrar en varias tarjetas"],
+      ["refund", "Devoluci\u00f3n", "Devolver una operaci\u00f3n cobrada"],
+      ["link", "Enlace de pago", "Enviar por SMS, email o QR"],
+      ["preauth", "Preautorizaci\u00f3n", "Retener importe y cerrar despu\u00e9s"],
+      ["note", "A\u00f1adir referencia", "Concepto, mesa o n\u00famero de pedido"],
+      ["printer", "Reimprimir \u00faltimo ticket", "Copia para el comercio o el cliente"]
+    ],
+    groups: [
+      ["Operaciones", [
+        ["refund", "Devoluciones", "Total o parcial sobre una venta"],
+        ["cancel", "Anulaciones", "Anular una operaci\u00f3n del d\u00eda"],
+        ["history", "Historial de operaciones", "Buscar por importe, hora o tarjeta"],
+        ["preauth", "Preautorizaciones abiertas", "3 pendientes de cierre"]
+      ]],
+      ["Caja y cierre", [
+        ["close", "Cierre de caja", "Totales del turno y env\u00edo autom\u00e1tico"],
+        ["report", "Informes de venta", "Diario, semanal y por empleado"],
+        ["cash", "Arqueo de efectivo", "Cuadre de caja al cierre"]
+      ]],
+      ["Comercio", [
+        ["shop", "Datos del comercio", "Raz\u00f3n social, ticket y logotipo"],
+        ["users", "Usuarios y turnos", "Permisos y apertura de turno"],
+        ["percent", "Propinas e impuestos", "Porcentajes sugeridos e IVA"],
+        ["catalog", "Cat\u00e1logo y art\u00edculos", "Cobro r\u00e1pido por producto"],
+        ["link", "Enlaces de pago", "Cobros a distancia y su estado"]
+      ]],
+      ["Dispositivo", [
+        ["gear", "Ajustes del terminal", "Idioma, brillo, sonido y bloqueo"],
+        ["printer", "Impresora y tickets", "Papel, copia y ticket digital"],
+        ["wifi", "Conectividad", "Wi-Fi, datos m\u00f3viles y estado"],
+        ["update", "Actualizaciones", "Versi\u00f3n del software del TPV"],
+        ["help", "Soporte y ayuda", "Incidencias y contacto"]
+      ]]
+    ]
+  },
+  en: {
+    enterAmount: "Enter amount",
+    continue: "Continue",
+    charge: "Charge",
+    manage: "Manage",
+    back: "Back",
+    needAmount: "Enter an amount to continue",
+    soon: "Available in the full prototype",
+    tools: [
+      ["tip", "Add tip", "Suggestions on the customer screen"],
+      ["split", "Split payment", "Charge across several cards"],
+      ["refund", "Refund", "Return a captured transaction"],
+      ["link", "Payment link", "Send by SMS, email or QR"],
+      ["preauth", "Pre-authorisation", "Hold an amount, capture later"],
+      ["note", "Add reference", "Note, table or order number"],
+      ["printer", "Reprint last receipt", "Merchant or customer copy"]
+    ],
+    groups: [
+      ["Transactions", [
+        ["refund", "Refunds", "Full or partial on a sale"],
+        ["cancel", "Voids", "Void a same-day transaction"],
+        ["history", "Transaction history", "Search by amount, time or card"],
+        ["preauth", "Open pre-authorisations", "3 pending capture"]
+      ]],
+      ["Till & closing", [
+        ["close", "End of day", "Shift totals and auto settlement"],
+        ["report", "Sales reports", "Daily, weekly and per employee"],
+        ["cash", "Cash count", "Balance the till at closing"]
+      ]],
+      ["Business", [
+        ["shop", "Business details", "Legal name, receipt and logo"],
+        ["users", "Users and shifts", "Permissions and shift start"],
+        ["percent", "Tips and taxes", "Suggested rates and VAT"],
+        ["catalog", "Catalogue and items", "Quick charge per product"],
+        ["link", "Payment links", "Remote charges and their status"]
+      ]],
+      ["Device", [
+        ["gear", "Terminal settings", "Language, brightness, sound, lock"],
+        ["printer", "Printer and receipts", "Paper, copies and digital receipt"],
+        ["wifi", "Connectivity", "Wi-Fi, mobile data and status"],
+        ["update", "Software updates", "Terminal software version"],
+        ["help", "Support and help", "Incidents and contact"]
+      ]]
+    ]
+  }
+};
+
+class Component extends DCLogic {
+  state = { tab: "charge", cents: 0, toolsOpen: false, toast: null, paying: false };
+  toastTimer = null;
+
+  componentWillUnmount() { clearTimeout(this.toastTimer); }
+
+  flash(msg) {
+    clearTimeout(this.toastTimer);
+    this.setState({ toast: msg });
+    this.toastTimer = setTimeout(() => this.setState({ toast: null }), 2200);
+  }
+
+  press = (digit) => () => {
+    if (this.state.cents >= 100000000) return;
+    this.setState((s) => ({ cents: s.cents * 10 + digit }));
+  };
+
+  backspace = () => this.setState((s) => ({ cents: Math.floor(s.cents / 10) }));
+
+  format(cents) {
+    const units = Math.floor(cents / 100);
+    const dec = String(cents % 100).padStart(2, "0");
+    return units.toLocaleString("es-ES") + "," + dec + " \u20ac";
+  }
+
+  renderVals() {
+    const t = COPY[this.props.language === "en" ? "en" : "es"];
+    const cents = this.state.cents;
+    const tab = this.state.tab;
+    const paying = this.state.paying;
+    const icon = (name, size) => svg(P[name] || P.gear, { w: size || 30, h: size || 30 });
+
+    const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const key = (label, extra) => Object.assign({ label, isDigit: false, isBack: false, isInert: false, cursor: "pointer" }, extra);
+    const keys = digits.map((d) => key(String(d), { isDigit: true, onPress: this.press(d) }));
+    keys.push(key(",", { isInert: true, cursor: "default", onPress: () => {} }));
+    keys.push(key("0", { isDigit: true, onPress: this.press(0) }));
+    keys.push(key("", { isBack: true, onPress: this.backspace }));
+
+    return {
+      t,
+      merchant: this.props.merchant ?? "Cafeter\u00eda Nou Barris \u00b7 Terminal 02",
+      display: this.format(cents),
+      keys,
+      continueBg: cents > 0 ? "rgb(7,37,80)" : "rgba(7,37,80,.35)",
+      onCharge: tab === "charge" && !paying,
+      onManage: tab === "manage" && !paying,
+      onPayment: paying,
+      navVisible: !paying,
+      toolsOpen: this.state.toolsOpen,
+      toast: this.state.toast,
+      toastOpen: !!this.state.toast,
+      chargedAmount: this.format(cents),
+      language: this.props.language === "en" ? "en" : "es",
+      outcome: this.props.outcome === "ko" ? "ko" : "ok",
+      chargeInk: tab === "charge" ? "rgb(7,37,80)" : "rgb(98,118,155)",
+      manageInk: tab === "manage" ? "rgb(7,37,80)" : "rgb(98,118,155)",
+      chargeUnderline: tab === "charge" ? "rgb(7,37,80)" : "transparent",
+      manageUnderline: tab === "manage" ? "rgb(7,37,80)" : "transparent",
+      tools: t.tools.map(([key, label, hint]) => ({
+        label, hint, icon: icon(key, 28),
+        onPick: () => { this.setState({ toolsOpen: false }); this.flash(label + " \u00b7 " + t.soon); }
+      })),
+      manageGroups: t.groups.map(([title, items]) => ({
+        title,
+        items: items.map(([key, label, hint]) => ({
+          label, hint, icon: icon(key, 30),
+          onOpen: () => this.flash(label + " \u00b7 " + t.soon)
+        }))
+      })),
+      onToggleTools: () => this.setState((s) => ({ toolsOpen: !s.toolsOpen })),
+      onContinue: () => {
+        if (this.state.cents <= 0) { this.flash(t.needAmount); return; }
+        this.setState({ paying: true, toolsOpen: false, toast: null });
+      },
+      goCharge: () => this.setState({ tab: "charge", paying: false, toolsOpen: false }),
+      onPaymentDone: () => this.setState({ tab: "charge", paying: false, toolsOpen: false, cents: 0, toast: null }),
+      goManage: () => this.setState({ tab: "manage", paying: false, toolsOpen: false })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

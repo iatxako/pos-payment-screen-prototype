@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#0d0d10}
+a{color:rgb(7,37,80)}a:hover{color:rgb(98,118,155)}
+@keyframes wave{0%{transform:scale(.5);opacity:.85}70%{opacity:.18}100%{transform:scale(1);opacity:0}}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes sheetUp{from{transform:translateY(110%)}to{transform:translateY(0)}}
+@keyframes fadeUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes popIn{from{transform:scale(.86);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes flood{from{transform:translate(-50%,-50%) scale(.04)}to{transform:translate(-50%,-50%) scale(1)}}
+@keyframes drawCheck{from{transform:rotate(-45deg) translate(4px,-8px) scale(.4);opacity:0}to{transform:rotate(-45deg) translate(4px,-8px) scale(1);opacity:1}}
+@keyframes ringOut{0%{transform:scale(.55);opacity:.6}100%{transform:scale(1.35);opacity:0}}
+@media (prefers-reduced-motion:reduce){[data-wave]{animation:none !important}}
+</style>
+</helmet>
+<div style="position:relative;width:720px;height:1600px;overflow:hidden;background-color:rgb(243,246,254);font-family:Inter,system-ui,sans-serif;color:rgb(7,37,80);user-select:none;-webkit-font-smoothing:antialiased">
+
+  <sc-if value="{{ showTap }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0">
+
+      <div onClick="{{ onTap }}" style="position:absolute;left:0;top:0;width:720px;height:1240px;cursor:pointer"></div>
+
+      <div style="position:absolute;left:196.383px;top:72px;width:341.891px;height:341.891px">
+        <div data-wave="1" style="position:absolute;left:7.109px;top:7.109px;width:327.673px;height:327.673px;border-radius:50%;background-color:rgba(234,242,253,0.5);animation:breathe 6s ease-in-out infinite"></div>
+        <div data-wave="2" style="position:absolute;left:37.856px;top:37.856px;width:266.18px;height:266.18px;border-radius:50%;background-color:rgba(226,238,254,0.5);animation:breathe 6s ease-in-out infinite .9s"></div>
+
+        <sc-if value="{{ pulsing }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;left:7.109px;top:7.109px;width:327.673px;height:327.673px">
+            <div data-wave="3" style="position:absolute;inset:0;border-radius:50%;background-color:rgba(210,228,252,0.55);animation:wave 3.6s cubic-bezier(.22,.61,.36,1) infinite"></div>
+            <div data-wave="4" style="position:absolute;inset:0;border-radius:50%;background-color:rgba(210,228,252,0.45);animation:wave 3.6s cubic-bezier(.22,.61,.36,1) infinite 1.2s"></div>
+            <div data-wave="5" style="position:absolute;inset:0;border-radius:50%;background-color:rgba(210,228,252,0.35);animation:wave 3.6s cubic-bezier(.22,.61,.36,1) infinite 2.4s"></div>
+          </div>
+        </sc-if>
+
+        <div style="position:absolute;left:60.039px;top:105.069px;width:222.022px;height:131.753px;overflow:hidden">
+          <img src="assets/v2/nfc-navy.svg" alt="Contactless" style="position:absolute;left:0;top:0;width:222.028px;height:131.75px">
+        </div>
+      </div>
+
+      <div style="position:absolute;left:159px;top:397.037px;width:401px;display:flex;flex-direction:column;gap:35.1392px;align-items:center">
+        <div style="width:401px;display:flex;flex-direction:column;align-items:center">
+          <span style="font-weight:700;font-size:49.1949px;line-height:1.5;text-align:center;white-space:nowrap">{{ t.title }}</span>
+          <span style="align-self:stretch;font-weight:500;font-size:28px;line-height:1.5;text-align:center;color:rgb(98,118,155)">{{ t.subtitle }}</span>
+        </div>
+
+        <div style="height:36.864px;display:flex;flex-direction:row;gap:18.4321px;justify-content:center;align-items:flex-start;align-self:stretch">
+          <div style="width:55.132px;height:36.864px;border-radius:4.6px;background:rgb(255,255,255);box-shadow:inset 0 0 0 .576px rgb(231,236,245);display:flex;align-items:center;justify-content:center;overflow:hidden">
+            <span style="font-size:13.5px;font-weight:800;font-style:italic;letter-spacing:-.02em;color:rgb(23,30,108)">VISA</span>
+          </div>
+          <div style="position:relative;width:55.132px;height:36.864px;border-radius:4.6px;background:rgb(255,255,255);box-shadow:inset 0 0 0 .576px rgb(231,236,245);overflow:hidden">
+            <div style="position:absolute;left:14.6px;top:8.4px;width:20px;height:20px;border-radius:50%;background:rgb(235,0,27)"></div>
+            <div style="position:absolute;left:20.5px;top:8.4px;width:20px;height:20px;border-radius:50%;background:rgb(247,158,27)"></div>
+            <div style="position:absolute;left:20.5px;top:10.6px;width:14.1px;height:15.6px;border-radius:50%;background:rgb(255,95,0)"></div>
+          </div>
+          <div style="width:55.132px;height:36.864px;border-radius:4.6px;background:rgb(255,255,255);box-shadow:inset 0 0 0 .576px rgb(231,236,245);display:flex;align-items:center;justify-content:center;gap:2px;overflow:hidden">
+            <span style="font-size:12.5px;line-height:1;color:rgb(0,0,0)">&#63743;</span><span style="font-size:12.5px;font-weight:600;letter-spacing:-.03em;color:rgb(0,0,0)">Pay</span>
+          </div>
+          <div style="width:55.132px;height:36.864px;border-radius:4.6px;background:rgb(255,255,255);box-shadow:inset 0 0 0 .576px rgb(231,236,245);display:flex;align-items:center;justify-content:center;gap:2px;overflow:hidden">
+            <span style="font-size:12.5px;font-weight:700;color:rgb(66,133,244)">G</span><span style="font-size:12.5px;font-weight:500;letter-spacing:-.02em;color:rgb(60,64,67)">Pay</span>
+          </div>
+          <div style="position:relative;width:55.132px;height:36.864px;border-radius:4.6px;background:rgb(1,111,208);display:flex;align-items:center;justify-content:center;overflow:hidden">
+            <div style="width:30px;height:24px;border-radius:2px;background:rgb(255,255,254);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px">
+              <span style="font-size:9.5px;font-weight:800;line-height:1;letter-spacing:.02em;color:rgb(1,111,208)">AM</span>
+              <span style="font-size:9.5px;font-weight:800;line-height:1;letter-spacing:.02em;color:rgb(1,111,208)">EX</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <span style="position:absolute;left:129.328px;top:727px;width:462px;font-weight:800;font-size:122.5px;line-height:1.2;text-align:center;white-space:nowrap">{{ amount }}</span>
+
+      <sc-if value="{{ reading }}">
+        <div style="position:absolute;left:159px;top:900px;width:401px;display:flex;align-items:center;justify-content:center;gap:16px;animation:fadeIn .3s ease both">
+          <div style="width:26px;height:26px;border-radius:50%;border:3px solid rgba(7,37,80,.15);border-top-color:rgb(7,37,80);animation:spin 1s linear infinite"></div>
+          <span style="font-weight:500;font-size:28px;line-height:1.5;color:rgb(98,118,155)">{{ t.reading }}</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ sheetVisible }}">
+        <div style="position:absolute;left:32px;top:1324px;width:656px;animation:fadeUp .5s cubic-bezier(.22,1,.36,1) both">
+          <div onClick="{{ onExpand }}" style="height:90px;border-radius:24px;background-color:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);display:flex;flex-direction:row;padding:40px;justify-content:space-between;align-items:center;box-sizing:border-box;cursor:pointer;transition:background .18s ease,transform .18s ease" style-active="transform:scale(.99);background-color:rgb(248,250,255)">
+            <div style="width:384px;height:56px;display:flex;flex-direction:row;gap:12px;align-items:center">
+              <div style="width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center">
+                <div style="width:37.333px;height:37.333px;display:grid;grid-template-columns:repeat(2,14px);grid-template-rows:repeat(2,14px);gap:9.333px">
+                  <div style="width:14px;height:14px;border-radius:3px;background:rgb(7,37,80)"></div>
+                  <div style="width:14px;height:14px;border-radius:3px;background:rgb(7,37,80)"></div>
+                  <div style="width:14px;height:14px;border-radius:3px;background:rgb(7,37,80)"></div>
+                  <div style="width:14px;height:14px;border-radius:3px;background:rgb(7,37,80)"></div>
+                </div>
+              </div>
+              <span style="font-weight:500;font-size:28px;line-height:1.5;white-space:nowrap">{{ t.other }}</span>
+            </div>
+            <div style="width:56px;height:56px;display:flex;align-items:center;justify-content:center">
+              <img src="assets/v2/chevron-navy.svg" alt="" style="width:33.221px;height:19.14px">
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="position:absolute;left:32px;top:1446px;width:656px;height:1px;background:rgba(7,37,80,.1)"></div>
+
+      <div onClick="{{ onAskCancel }}" style="position:absolute;left:32px;top:1478px;width:656px;height:90px;display:flex;flex-direction:row;gap:16px;justify-content:center;align-items:center;box-sizing:border-box;cursor:pointer;transition:opacity .18s ease" style-active="opacity:.6">
+        <div style="position:relative;width:42px;height:42px;border-radius:50%;box-shadow:inset 0 0 0 2.333px rgb(235,0,27);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <div style="position:absolute;width:20px;height:2.8px;border-radius:2px;background:rgb(235,0,27);transform:rotate(45deg)"></div>
+          <div style="position:absolute;width:20px;height:2.8px;border-radius:2px;background:rgb(235,0,27);transform:rotate(-45deg)"></div>
+        </div>
+        <span style="font-weight:500;font-size:20.3473px;line-height:1.5;white-space:nowrap;color:rgb(235,0,27)">{{ t.cancelOp }}</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ expanded }}">
+    <div style="position:absolute;inset:0;animation:fadeIn .2s ease both">
+      <div style="position:absolute;left:196.383px;top:72px;width:341.891px;height:341.891px">
+        <div style="position:absolute;left:7.109px;top:7.109px;width:327.673px;height:327.673px;border-radius:50%;background-color:rgba(234,242,253,0.5);animation:breathe 6s ease-in-out infinite"></div>
+        <div style="position:absolute;left:37.856px;top:37.856px;width:266.18px;height:266.18px;border-radius:50%;background-color:rgba(226,238,254,0.5)"></div>
+        <div style="position:absolute;left:60.039px;top:105.069px;width:222.022px;height:131.753px;overflow:hidden">
+          <img src="assets/v2/nfc-navy.svg" alt="Contactless" style="position:absolute;left:0;top:0;width:222.028px;height:131.75px">
+        </div>
+      </div>
+      <div style="position:absolute;left:159px;top:397.037px;width:401px;display:flex;flex-direction:column;align-items:center">
+        <span style="font-weight:700;font-size:49.1949px;line-height:1.5;text-align:center;white-space:nowrap">{{ t.title }}</span>
+        <span style="align-self:stretch;font-weight:500;font-size:28px;line-height:1.5;text-align:center;color:rgb(98,118,155)">{{ t.subtitle }}</span>
+      </div>
+      <span style="position:absolute;left:129.328px;top:727px;width:462px;font-weight:800;font-size:122.5px;line-height:1.2;text-align:center;white-space:nowrap">{{ amount }}</span>
+
+      <div style="position:absolute;left:32px;top:917px;width:656px;border-radius:32px;background-color:rgb(255,255,255);box-shadow:0px 4px 24px 0px rgba(11,48,100,0.06);padding:0 40px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:5px;align-items:center;animation:sheetUp .5s cubic-bezier(.22,1,.36,1) both">
+        <div onClick="{{ onCollapse }}" style="width:656px;height:90px;border-radius:24px;display:flex;flex-direction:row;padding:40px;justify-content:space-between;align-items:center;box-sizing:border-box;cursor:pointer">
+          <div style="width:384px;height:56px;display:flex;flex-direction:row;gap:12px;align-items:center">
+            <div style="width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center">
+              <div style="width:37.333px;height:37.333px;display:grid;grid-template-columns:repeat(2,14px);grid-template-rows:repeat(2,14px);gap:9.333px">
+                <div style="width:14px;height:14px;border-radius:3px;background:rgb(7,37,80)"></div>
+                <div style="width:14px;height:14px;border-radius:3px;background:rgb(7,37,80)"></div>
+                <div style="width:14px;height:14px;border-radius:3px;background:rgb(7,37,80)"></div>
+                <div style="width:14px;height:14px;border-radius:3px;background:rgb(7,37,80)"></div>
+              </div>
+            </div>
+            <span style="font-weight:500;font-size:28px;line-height:1.5;white-space:nowrap">{{ t.other }}</span>
+          </div>
+          <div style="width:56px;height:56px;display:flex;align-items:center;justify-content:center">
+            <img src="assets/v2/chevron-navy.svg" alt="" style="width:33.221px;height:19.14px;transform:rotate(180deg)">
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px;align-self:stretch">
+          <div style="display:flex;flex-direction:row;gap:12px;justify-content:center;align-items:center">
+            <div onClick="{{ onBizum }}" style="position:relative;width:184.039px;height:175.157px;overflow:hidden;border-radius:20.1619px;background-color:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);cursor:pointer;transition:transform .16s ease" style-active="transform:scale(.97)">
+              <div style="position:absolute;left:36.059px;top:32px;width:113px;height:85px;overflow:hidden">
+                <div style="position:absolute;left:0;top:0;width:112.236px;height:111.467px;background:url(assets/v2/bizum.png) center / cover no-repeat"></div>
+              </div>
+              <span style="position:absolute;left:0;top:128px;width:184.039px;font-weight:500;font-size:18px;line-height:1.5;text-align:center">Bizum</span>
+            </div>
+            <div onClick="{{ onMbway }}" style="position:relative;width:184.039px;height:175.157px;overflow:hidden;border-radius:20.1619px;background-color:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);cursor:pointer;transition:transform .16s ease" style-active="transform:scale(.97)">
+              <div style="position:absolute;left:41.98px;top:27px;width:96px;height:86px;overflow:hidden">
+                <div style="position:absolute;left:-11px;top:0;width:104.559px;height:106.259px;background:url(assets/v2/mbway.png) center / cover no-repeat"></div>
+              </div>
+              <span style="position:absolute;left:0;top:128px;width:184.039px;font-weight:500;font-size:18px;line-height:1.5;text-align:center">MB Way</span>
+            </div>
+            <div onClick="{{ onAlipay }}" style="position:relative;width:184.039px;height:175.157px;overflow:hidden;border-radius:20.1619px;background-color:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);cursor:pointer;transition:transform .16s ease" style-active="transform:scale(.97)">
+              <div style="position:absolute;left:44px;top:36px;width:96px;height:70px;background:url(assets/alipay.png) center / contain no-repeat"></div>
+              <span style="position:absolute;left:0;top:128px;width:184.039px;font-weight:500;font-size:18px;line-height:1.5;text-align:center">Alipay</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:row;gap:12px;justify-content:center;align-items:center">
+            <div onClick="{{ onWero }}" style="position:relative;width:184.039px;height:175.157px;overflow:hidden;border-radius:20.1619px;background-color:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);cursor:pointer;transition:transform .16s ease" style-active="transform:scale(.97)">
+              <div style="position:absolute;left:32.059px;top:34.843px;width:119.576px;height:85.639px;background:url(assets/v2/wero.png) center / cover no-repeat"></div>
+              <span style="position:absolute;left:0;top:128px;width:184.039px;font-weight:500;font-size:18px;line-height:1.5;text-align:center">Wero</span>
+            </div>
+            <div onClick="{{ onTransfer }}" style="position:relative;width:184.039px;height:175.157px;overflow:hidden;border-radius:20.1619px;background-color:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);cursor:pointer;transition:transform .16s ease" style-active="transform:scale(.97)">
+              <div style="position:absolute;left:29.02px;top:-0.157px;width:126px;height:128px;display:flex;align-items:center;justify-content:center">
+                <svg width="60" height="68.548" viewBox="0 0 59.98 68.548" fill="rgb(7,37,80)">
+                  <path d="M 29.99 0 L 0 17.137 L 0 21.421 L 59.98 21.421 L 59.98 17.137 L 29.99 0 Z M 8.569 25.706 L 7.712 55.696 L 18.422 55.696 L 17.137 25.706 L 8.569 25.706 Z M 25.706 25.706 L 24.849 55.696 L 35.56 55.696 L 34.274 25.706 L 25.706 25.706 Z M 42.843 25.706 L 41.986 55.696 L 52.697 55.696 L 51.411 25.706 L 42.843 25.706 Z M 0 68.548 L 59.98 68.548 L 59.98 59.98 L 0 59.98 L 0 68.548 Z" fill-rule="nonzero"></path>
+                </svg>
+              </div>
+              <span style="position:absolute;left:0;top:128px;width:184.039px;font-weight:500;font-size:18px;line-height:1.5;text-align:center">{{ t.transfer }}</span>
+            </div>
+            <div onClick="{{ onMore }}" style="position:relative;width:184.039px;height:175.157px;overflow:hidden;border-radius:20.1619px;background-color:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);cursor:pointer;transition:transform .16s ease" style-active="transform:scale(.97)">
+              <div style="position:absolute;left:56.5px;top:36px;width:71.111px;height:71.111px;display:flex;align-items:center;justify-content:center">
+                <img src="assets/v2/three-dots-navy.svg" alt="" style="width:13.333px;height:57.778px;transform:rotate(90deg)">
+              </div>
+              <span style="position:absolute;left:0;top:128px;width:184.039px;font-weight:500;font-size:18px;line-height:1.5;text-align:center">{{ t.moreLabel }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div onClick="{{ onAskCancel }}" style="position:absolute;left:32px;top:1478px;width:656px;height:90px;display:flex;flex-direction:row;gap:16px;justify-content:center;align-items:center;cursor:pointer;transition:opacity .18s ease" style-active="opacity:.6">
+        <div style="position:relative;width:42px;height:42px;border-radius:50%;box-shadow:inset 0 0 0 2.333px rgb(235,0,27);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <div style="position:absolute;width:20px;height:2.8px;border-radius:2px;background:rgb(235,0,27);transform:rotate(45deg)"></div>
+          <div style="position:absolute;width:20px;height:2.8px;border-radius:2px;background:rgb(235,0,27);transform:rotate(-45deg)"></div>
+        </div>
+        <span style="font-weight:500;font-size:20.3473px;line-height:1.5;white-space:nowrap;color:rgb(235,0,27)">{{ t.cancelOp }}</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showMethod }}">
+    <div style="position:absolute;inset:0;animation:fadeIn .25s ease both">
+      <div style="position:absolute;left:60px;top:140px;width:600px;display:flex;flex-direction:column;align-items:center;gap:28px">
+        <span style="font-weight:700;font-size:49.1949px;line-height:1.5;text-align:center">{{ methodLabel }}</span>
+        <span style="font-weight:500;font-size:28px;line-height:1.5;text-align:center;color:rgb(98,118,155)">{{ t.scan }}</span>
+        <span style="font-weight:800;font-size:98px;line-height:1.2;white-space:nowrap">{{ amount }}</span>
+      </div>
+
+      <div style="position:absolute;left:32px;top:820px;width:656px;border-radius:32px;background-color:rgb(255,255,255);box-shadow:0px 4px 24px 0px rgba(11,48,100,0.06);padding:40px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;gap:32px;animation:sheetUp .45s cubic-bezier(.22,1,.36,1) both">
+        <div style="position:relative;width:340px;height:340px;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);display:flex;align-items:center;justify-content:center">
+          <div style="position:absolute;left:28px;top:28px;right:28px;bottom:28px;border-radius:12px;background-image:repeating-linear-gradient(135deg,rgba(7,37,80,.07) 0 8px,rgba(7,37,80,0) 8px 16px);box-shadow:inset 0 0 0 1px rgba(7,37,80,.07)"></div>
+          <span style="position:relative;font-weight:500;font-size:20px;color:rgb(98,118,155)">QR</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <div style="width:24px;height:24px;border-radius:50%;border:3px solid rgba(7,37,80,.15);border-top-color:rgb(7,37,80);animation:spin 1s linear infinite"></div>
+          <span style="font-weight:500;font-size:24px;color:rgb(98,118,155)">{{ t.waiting }}</span>
+        </div>
+      </div>
+
+      <div onClick="{{ onAskCancel }}" style="position:absolute;left:32px;top:1478px;width:656px;height:90px;display:flex;flex-direction:row;gap:16px;justify-content:center;align-items:center;cursor:pointer;transition:opacity .18s ease" style-active="opacity:.6">
+        <div style="position:relative;width:42px;height:42px;border-radius:50%;box-shadow:inset 0 0 0 2.333px rgb(235,0,27);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <div style="position:absolute;width:20px;height:2.8px;border-radius:2px;background:rgb(235,0,27);transform:rotate(45deg)"></div>
+          <div style="position:absolute;width:20px;height:2.8px;border-radius:2px;background:rgb(235,0,27);transform:rotate(-45deg)"></div>
+        </div>
+        <span style="font-weight:500;font-size:20.3473px;line-height:1.5;white-space:nowrap;color:rgb(235,0,27)">{{ t.cancelOp }}</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showReasons }}">
+    <div style="position:absolute;inset:0;background:rgba(7,37,80,.12);animation:fadeIn .2s ease both">
+      <div style="position:absolute;left:32px;bottom:32px;width:656px;border-radius:32px;background:rgb(255,255,255);box-shadow:0px 8px 32px 0px rgba(11,48,100,.14);padding:48px 40px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:32px;animation:sheetUp .45s cubic-bezier(.22,1,.36,1) both">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-weight:700;font-size:38px;line-height:1.3">{{ t.reasonTitle }}</span>
+          <span style="font-weight:500;font-size:24px;line-height:1.5;color:rgb(98,118,155)">{{ t.reasonHelp }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <sc-for list="{{ reasons }}" as="r" hint-placeholder-count="4">
+            <div onClick="{{ r.onPick }}" style="height:96px;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);display:flex;align-items:center;padding:0 32px;box-sizing:border-box;cursor:pointer;transition:transform .16s ease,background .16s ease" style-active="transform:scale(.99);background:rgb(243,246,254)">
+              <span style="font-weight:500;font-size:26px;line-height:1.4">{{ r.label }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div onClick="{{ onKeepGoing }}" style="height:96px;border-radius:20.1619px;background:rgb(243,246,254);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .16s ease" style-active="transform:scale(.99)">
+          <span style="font-weight:600;font-size:26px;color:rgb(7,37,80)">{{ t.keepGoing }}</span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showCancelled }}">
+    <div onClick="{{ onRestart }}" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;cursor:pointer;animation:fadeIn .25s ease both">
+      <div style="position:relative;width:200px;height:200px;border-radius:50%;box-shadow:inset 0 0 0 8px rgb(235,0,27);display:flex;align-items:center;justify-content:center;animation:popIn .45s cubic-bezier(.22,1,.36,1) both">
+        <div style="position:absolute;width:88px;height:8px;border-radius:4px;background:rgb(235,0,27);transform:rotate(45deg)"></div>
+        <div style="position:absolute;width:88px;height:8px;border-radius:4px;background:rgb(235,0,27);transform:rotate(-45deg)"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+        <span style="font-weight:700;font-size:49.1949px;line-height:1.5">{{ t.cancelled }}</span>
+        <span style="font-weight:800;font-size:80px;line-height:1.2;white-space:nowrap;color:rgb(98,118,155)">{{ amount }}</span>
+      </div>
+      <div style="width:592px;border-radius:24px;background:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245);padding:32px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;align-items:center">
+        <span style="font-weight:500;font-size:22px;line-height:1.5;color:rgb(98,118,155)">{{ t.reasonLabel }}</span>
+        <span style="font-weight:600;font-size:30px;line-height:1.4;text-align:center;text-wrap:pretty">{{ cancelReason }}</span>
+      </div>
+      <span style="font-weight:500;font-size:22px;color:rgb(98,118,155)">{{ t.restart }}</span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showFlood }}">
+    <div style="position:absolute;inset:0;overflow:hidden">
+      <div style="position:absolute;left:367.328px;top:243px;width:2900px;height:2900px;border-radius:50%;background:rgb(0,109,252);transform:translate(-50%,-50%);animation:flood .78s cubic-bezier(.3,.7,.25,1) both"></div>
+
+      <sc-if value="{{ phaseApproved }}">
+        <div style="position:absolute;left:367.328px;top:243px;width:2900px;height:2900px;border-radius:50%;background:rgb(0,138,82);transform:translate(-50%,-50%);animation:flood .66s cubic-bezier(.3,.7,.25,1) both"></div>
+      </sc-if>
+      <sc-if value="{{ phaseDeclined }}">
+        <div style="position:absolute;left:367.328px;top:243px;width:2900px;height:2900px;border-radius:50%;background:rgb(197,0,23);transform:translate(-50%,-50%);animation:flood .66s cubic-bezier(.3,.7,.25,1) both"></div>
+      </sc-if>
+
+      <sc-if value="{{ phaseLive }}">
+        <div style="position:absolute;inset:0;color:rgb(255,255,255)">
+          <div style="position:absolute;left:196.383px;top:72px;width:341.891px;height:341.891px">
+        <div style="position:absolute;left:7.109px;top:7.109px;width:327.673px;height:327.673px;border-radius:50%;background:rgba(255,255,255,.14)"></div>
+        <div style="position:absolute;left:7.109px;top:7.109px;width:327.673px;height:327.673px;border-radius:50%;border:5px solid rgba(255,255,255,.5);box-sizing:border-box;animation:ringOut 2s ease-out infinite"></div>
+        <img src="assets/v2/nfc-white.svg" alt="Contactless" style="position:absolute;left:60.039px;top:105.069px;width:222.028px;height:131.75px">
+      </div>
+          <div style="position:absolute;left:60px;top:470px;width:600px;display:flex;flex-direction:column;align-items:center;gap:40px;animation:fadeIn .3s ease .3s both">
+            <sc-if value="{{ phaseRead }}">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:40px">
+                <div style="position:relative;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center">
+                  <div style="width:60px;height:32px;border-left:9px solid rgb(255,255,255);border-bottom:9px solid rgb(255,255,255);animation:drawCheck .4s cubic-bezier(.22,1,.36,1) both"></div>
+                </div>
+                <span style="font-weight:700;font-size:49.1949px;line-height:1.3;text-align:center;text-wrap:pretty">{{ t.cardRead }}</span>
+              </div>
+            </sc-if>
+            <sc-if value="{{ phaseProcessing }}">
+              <div style="display:flex;flex-direction:column;align-items:center;gap:40px;animation:fadeIn .3s ease both">
+                <div style="width:120px;height:120px;border-radius:50%;border:10px solid rgba(255,255,255,.3);border-top-color:rgb(255,255,255);animation:spin 1s linear infinite"></div>
+                <div style="display:flex;flex-direction:column;align-items:center;gap:16px">
+                  <span style="font-weight:700;font-size:49.1949px;line-height:1.3;text-align:center">{{ t.processing }}</span>
+                  <span style="font-weight:500;font-size:28px;line-height:1.5;color:rgb(255,255,255)">{{ t.dontRemove }}</span>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <span style="position:absolute;left:129.328px;top:1300px;width:462px;font-weight:800;font-size:98px;line-height:1.2;text-align:center;white-space:nowrap;color:rgb(255,255,255)">{{ amount }}</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ phaseApproved }}">
+        <div onClick="{{ onRestart }}" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:56px;cursor:pointer;color:rgb(255,255,255);animation:fadeIn .3s ease .25s both">
+          <div style="position:relative;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;animation:popIn .45s cubic-bezier(.22,1,.36,1) .2s both">
+            <div style="width:104px;height:54px;border-left:14px solid rgb(255,255,255);border-bottom:14px solid rgb(255,255,255);transform:rotate(-45deg) translate(4px,-8px)"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:20px">
+            <span style="width:600px;font-weight:700;font-size:49.1949px;line-height:1.3;text-align:center;text-wrap:pretty">{{ t.approved }}</span>
+            <span style="font-weight:800;font-size:98px;line-height:1.2;white-space:nowrap">{{ amount }}</span>
+            <span style="font-weight:500;font-size:28px;line-height:1.5;color:rgb(255,255,255)">{{ t.remove }}</span>
+          </div>
+          <span style="position:absolute;bottom:96px;font-weight:500;font-size:22px;color:rgb(255,255,255)">{{ t.restart }}</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ phaseDeclined }}">
+        <div onClick="{{ onRestart }}" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:48px;cursor:pointer;color:rgb(255,255,255);animation:fadeIn .3s ease .25s both">
+          <div style="position:relative;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;animation:popIn .45s cubic-bezier(.22,1,.36,1) .2s both">
+            <div style="position:absolute;width:110px;height:14px;border-radius:7px;background:rgb(255,255,255);transform:rotate(45deg)"></div>
+            <div style="position:absolute;width:110px;height:14px;border-radius:7px;background:rgb(255,255,255);transform:rotate(-45deg)"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:20px">
+            <span style="width:620px;font-weight:700;font-size:49.1949px;line-height:1.3;text-align:center;text-wrap:pretty">{{ t.declined }}</span>
+            <span style="font-weight:800;font-size:98px;line-height:1.2;white-space:nowrap;color:rgb(255,255,255)">{{ amount }}</span>
+          </div>
+          <div style="width:592px;border-radius:24px;background:rgba(255,255,255,.16);padding:32px 40px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px;align-items:center">
+            <span style="font-weight:500;font-size:22px;line-height:1.5;color:rgb(255,255,255)">{{ t.declinedReasonLabel }}</span>
+            <span style="font-weight:600;font-size:30px;line-height:1.4;text-align:center;text-wrap:pretty">{{ t.declinedReason }}</span>
+          </div>
+          <span style="font-weight:500;font-size:22px;color:rgb(255,255,255)">{{ t.retry }}</span>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showReceipt }}">
+    <div style="position:absolute;inset:0;animation:fadeIn .3s ease both">
+      <div style="position:absolute;left:254px;top:127px;width:212px;height:212px;border-radius:50%;background:rgb(190,227,196);display:flex;align-items:center;justify-content:center;animation:popIn .45s cubic-bezier(.22,1,.36,1) both">
+        <div style="width:96px;height:50px;border-left:16px solid rgb(11,79,53);border-bottom:16px solid rgb(11,79,53);transform:rotate(-45deg) translate(4px,-8px)"></div>
+      </div>
+
+      <div style="position:absolute;left:0;top:380px;width:720px;display:flex;flex-direction:column;align-items:center;gap:6px">
+        <span style="font-weight:700;font-size:49.1949px;line-height:1.3;text-align:center">{{ t.paid }}</span>
+        <span style="font-weight:800;font-size:76px;line-height:1.2;white-space:nowrap">{{ amount }}</span>
+        <span style="font-weight:500;font-size:28px;line-height:1.5;color:rgb(98,118,155)">{{ cardLine }}</span>
+      </div>
+
+      <div style="position:absolute;left:72px;top:625px;width:576px;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);padding:8px 28px;box-sizing:border-box;display:flex;flex-direction:column">
+        <sc-for list="{{ receiptRows }}" as="row" hint-placeholder-count="3">
+          <div style="height:76px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:16px;box-shadow:inset 0 -1px 0 0 rgb(237,242,252)">
+            <span style="font-weight:500;font-size:23px;line-height:1.4;color:rgb(98,118,155)">{{ row.label }}</span>
+            <span style="font-weight:600;font-size:23px;line-height:1.4;text-align:right">{{ row.value }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="position:absolute;left:60px;top:900px;width:600px;display:flex;flex-direction:column;align-items:center;gap:10px">
+        <span style="font-weight:700;font-size:34px;line-height:1.3;text-align:center">{{ t.receiptHow }}</span>
+        <span style="font-weight:500;font-size:24px;line-height:1.5;text-align:center;color:rgb(98,118,155)">{{ t.receiptHelp }}</span>
+      </div>
+
+      <div style="position:absolute;left:72px;top:1030px;width:576px;height:158px;display:flex;flex-direction:row;gap:13px;align-items:stretch">
+        <div onClick="{{ onPrint }}" style="position:relative;flex:1;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:{{ printRing }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;transition:transform .14s ease" style-active="transform:scale(.97)">
+          <svg width="52" height="52" viewBox="0 0 30 30" fill="none">
+            <path d="M8 12V4h14v8" stroke="rgb(7,37,80)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M22 21h4V12H4v9h4" stroke="rgb(7,37,80)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M8 17h14v9H8z" stroke="rgb(7,37,80)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <span style="font-weight:600;font-size:22px;line-height:1.3">{{ t.print }}</span>
+        </div>
+        <div onClick="{{ onEmail }}" style="position:relative;flex:1;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:{{ emailRing }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;transition:transform .14s ease" style-active="transform:scale(.97)">
+          <svg width="52" height="52" viewBox="0 0 30 30" fill="none">
+            <path d="M3 7h24v16H3z" stroke="rgb(7,37,80)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M3.8 8L15 17 26.2 8" stroke="rgb(7,37,80)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <span style="font-weight:600;font-size:22px;line-height:1.3">{{ t.email }}</span>
+        </div>
+        <div onClick="{{ onOtherReceipt }}" style="position:relative;flex:1;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:{{ otherRing }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;transition:transform .14s ease" style-active="transform:scale(.97)">
+          <div style="display:flex;flex-direction:row;gap:10px;align-items:center;height:52px">
+            <div style="width:13px;height:13px;border-radius:50%;background:rgb(78,102,143)"></div>
+            <div style="width:13px;height:13px;border-radius:50%;background:rgb(78,102,143)"></div>
+            <div style="width:13px;height:13px;border-radius:50%;background:rgb(78,102,143)"></div>
+          </div>
+          <span style="font-weight:600;font-size:22px;line-height:1.3">{{ t.otherReceipt }}</span>
+        </div>
+      </div>
+
+      <sc-if value="{{ receiptNote }}">
+        <div style="position:absolute;left:72px;top:1220px;width:576px;border-radius:16px;background:rgb(237,242,252);padding:22px 28px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s ease both">
+          <span style="font-weight:600;font-size:22px;line-height:1.4;text-align:center">{{ receiptNote }}</span>
+        </div>
+      </sc-if>
+
+      <div style="position:absolute;left:32px;top:1425px;width:656px;height:1px;background:rgba(7,37,80,.1)"></div>
+      <div onClick="{{ onNext }}" style="position:absolute;left:0;top:1460px;width:720px;height:110px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .16s ease" style-active="opacity:.6">
+        <span style="font-weight:600;font-size:24px;line-height:1.4">{{ t.nextCharge }}</span>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showKoSummary }}">
+    <div style="position:absolute;inset:0;animation:fadeIn .3s ease both">
+      <div style="position:absolute;left:254px;top:127px;width:212px;height:212px;border-radius:50%;background:rgb(253,213,216);display:flex;align-items:center;justify-content:center;animation:popIn .45s cubic-bezier(.22,1,.36,1) both">
+        <div style="position:absolute;width:96px;height:16px;border-radius:8px;background:rgb(155,0,18);transform:rotate(45deg)"></div>
+        <div style="position:absolute;width:96px;height:16px;border-radius:8px;background:rgb(155,0,18);transform:rotate(-45deg)"></div>
+      </div>
+
+      <div style="position:absolute;left:0;top:380px;width:720px;display:flex;flex-direction:column;align-items:center;gap:6px">
+        <span style="font-weight:700;font-size:49.1949px;line-height:1.3;text-align:center">{{ t.notPaid }}</span>
+        <span style="font-weight:800;font-size:76px;line-height:1.2;white-space:nowrap;color:rgb(98,118,155)">{{ amount }}</span>
+        <span style="font-weight:500;font-size:28px;line-height:1.5;color:rgb(98,118,155)">{{ cardLine }}</span>
+      </div>
+
+      <div style="position:absolute;left:72px;top:625px;width:576px;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);padding:8px 28px;box-sizing:border-box;display:flex;flex-direction:column">
+        <sc-for list="{{ koRows }}" as="row" hint-placeholder-count="4">
+          <div style="height:76px;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:16px;box-shadow:inset 0 -1px 0 0 rgb(237,242,252)">
+            <span style="font-weight:500;font-size:23px;line-height:1.4;color:rgb(98,118,155)">{{ row.label }}</span>
+            <span style="font-weight:600;font-size:23px;line-height:1.4;text-align:right">{{ row.value }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="position:absolute;left:60px;top:975px;width:600px;display:flex;flex-direction:column;align-items:center;gap:10px">
+        <span style="font-weight:700;font-size:34px;line-height:1.3;text-align:center">{{ t.koHow }}</span>
+        <span style="font-weight:500;font-size:24px;line-height:1.5;text-align:center;color:rgb(98,118,155);text-wrap:pretty">{{ t.koHelp }}</span>
+      </div>
+
+      <div style="position:absolute;left:72px;top:1110px;width:576px;display:flex;flex-direction:column;gap:14px">
+        <div onClick="{{ onRetry }}" style="height:96px;border-radius:20.1619px;background:rgb(7,37,80);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .14s ease" style-active="transform:scale(.99)">
+          <span style="font-weight:600;font-size:26px;color:rgb(255,255,255)">{{ t.retryCard }}</span>
+        </div>
+        <div style="display:flex;flex-direction:row;gap:14px">
+          <div onClick="{{ onOtherMethod }}" style="flex:1;height:96px;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .14s ease" style-active="transform:scale(.98)">
+            <span style="font-weight:600;font-size:24px;text-align:center">{{ t.otherMethod }}</span>
+          </div>
+          <div onClick="{{ onPrint }}" style="flex:1;height:96px;border-radius:20.1619px;background:rgb(255,255,255);box-shadow:inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05);display:flex;align-items:center;justify-content:center;gap:14px;cursor:pointer;transition:transform .14s ease" style-active="transform:scale(.98)">
+            <svg width="34" height="34" viewBox="0 0 30 30" fill="none">
+              <path d="M8 12V4h14v8" stroke="rgb(7,37,80)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M22 21h4V12H4v9h4" stroke="rgb(7,37,80)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M8 17h14v9H8z" stroke="rgb(7,37,80)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span style="font-weight:600;font-size:24px">{{ t.printProof }}</span>
+          </div>
+        </div>
+      </div>
+
+      <sc-if value="{{ receiptNote }}">
+        <div style="position:absolute;left:72px;top:1330px;width:576px;border-radius:16px;background:rgb(237,242,252);padding:22px 28px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s ease both">
+          <span style="font-weight:600;font-size:22px;line-height:1.4;text-align:center">{{ receiptNote }}</span>
+        </div>
+      </sc-if>
+
+      <div style="position:absolute;left:32px;top:1425px;width:656px;height:1px;background:rgba(7,37,80,.1)"></div>
+      <div onClick="{{ onNext }}" style="position:absolute;left:0;top:1460px;width:720px;height:110px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:opacity .16s ease" style-active="opacity:.6">
+        <span style="font-weight:600;font-size:24px;line-height:1.4">{{ t.startOver }}</span>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:720,&quot;height&quot;:1600},&quot;language&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;es&quot;,&quot;en&quot;],&quot;default&quot;:&quot;es&quot;,&quot;tsType&quot;:&quot;\&quot;es\&quot; | \&quot;en\&quot;&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;amount&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;1.000 €&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;outcome&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;ok&quot;,&quot;ko&quot;],&quot;default&quot;:&quot;ok&quot;,&quot;tsType&quot;:&quot;\&quot;ok\&quot; | \&quot;ko\&quot;&quot;,&quot;section&quot;:&quot;Comportamiento&quot;},&quot;revealDelayMs&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:2000,&quot;min&quot;:0,&quot;max&quot;:6000,&quot;step&quot;:250,&quot;unit&quot;:&quot;ms&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Comportamiento&quot;},&quot;waves&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Comportamiento&quot;},&quot;autoApprove&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Comportamiento&quot;},&quot;onDone&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;}}">
+const COPY = {
+  es: {
+    title: "Acerca tu tarjeta",
+    subtitle: "o inserta tu tarjeta",
+    reading: "Leyendo tarjeta\u2026",
+    other: "Otros m\u00e9todos de pago",
+    transfer: "Transferencia",
+    moreLabel: "Otros m\u00e9todos",
+    scan: "Escanea el c\u00f3digo con tu aplicaci\u00f3n",
+    waiting: "Esperando confirmaci\u00f3n\u2026",
+    cancelOp: "Cancelar operaci\u00f3n",
+    cardRead: "Tarjeta le\u00edda correctamente",
+    processing: "Procesando operaci\u00f3n\u2026",
+    dontRemove: "No retires la tarjeta",
+    declined: "Operaci\u00f3n no procesada",
+    declinedReasonLabel: "Motivo del rechazo",
+    declinedReason: "La entidad emisora ha denegado el pago",
+    retry: "toca para volver a intentarlo",
+    reasonTitle: "\u00bfPor qu\u00e9 cancelas?",
+    reasonHelp: "Elige el motivo para registrarlo en el ticket",
+    keepGoing: "Seguir con el pago",
+    cancelled: "Operaci\u00f3n cancelada",
+    reasonLabel: "Motivo registrado",
+    approved: "Operaci\u00f3n procesada correctamente",
+    remove: "Puede retirar la tarjeta",
+    restart: "toca para iniciar otra operaci\u00f3n",
+    paid: "Pago realizado",
+    notPaid: "Pago no realizado",
+    receiptHow: "\u00bfC\u00f3mo quieres recibir tu recibo?",
+    receiptHelp: "Puedes elegir una o m\u00e1s opciones",
+    print: "Imprimir",
+    email: "Email",
+    otherReceipt: "Otros m\u00e9todos",
+    nextCharge: "Toca aqu\u00ed para siguiente cobro",
+    startOver: "Toca aqu\u00ed para volver a empezar",
+    koHow: "\u00bfQu\u00e9 quieres hacer?",
+    koHelp: "El importe no se ha cargado. Puedes reintentarlo con la misma tarjeta u otro m\u00e9todo.",
+    retryCard: "Reintentar con la misma tarjeta",
+    otherMethod: "Otro m\u00e9todo de pago",
+    printProof: "Justificante",
+    rowDate: "Fecha",
+    rowMethod: "M\u00e9todo de pago",
+    rowRef: "Referencia",
+    rowReason: "Motivo",
+    rowCode: "C\u00f3digo",
+    valCard: "Tarjeta",
+    valReason: "Denegada por el emisor",
+    sentPrint: "Recibo enviado a la impresora",
+    sentEmail: "Recibo enviado por email",
+    sentOther: "Elige SMS, WhatsApp o c\u00f3digo QR",
+    sentProof: "Justificante de denegaci\u00f3n impreso",
+    reasons: [
+      "El cliente cambia de m\u00e9todo de pago",
+      "Importe incorrecto",
+      "El cliente desiste de la compra",
+      "Error o incidencia del terminal"
+    ]
+  },
+  en: {
+    title: "Tap your card",
+    subtitle: "or insert your card",
+    reading: "Reading card\u2026",
+    other: "Other payment methods",
+    transfer: "Bank transfer",
+    moreLabel: "More methods",
+    scan: "Scan the code with your app",
+    waiting: "Waiting for confirmation\u2026",
+    cancelOp: "Cancel transaction",
+    cardRead: "Card read successfully",
+    processing: "Processing transaction\u2026",
+    dontRemove: "Do not remove your card",
+    declined: "Transaction not processed",
+    declinedReasonLabel: "Decline reason",
+    declinedReason: "The issuing bank declined the payment",
+    retry: "tap to try again",
+    reasonTitle: "Why are you cancelling?",
+    reasonHelp: "Pick a reason so it is logged on the receipt",
+    keepGoing: "Continue with payment",
+    cancelled: "Transaction cancelled",
+    reasonLabel: "Reason logged",
+    approved: "Transaction processed successfully",
+    remove: "You can remove your card",
+    restart: "tap to start a new transaction",
+    paid: "Payment completed",
+    notPaid: "Payment not completed",
+    receiptHow: "How would you like your receipt?",
+    receiptHelp: "You can pick one or more options",
+    print: "Print",
+    email: "Email",
+    otherReceipt: "More options",
+    nextCharge: "Tap here for the next charge",
+    startOver: "Tap here to start over",
+    koHow: "What would you like to do?",
+    koHelp: "The amount was not charged. You can retry with the same card or use another method.",
+    retryCard: "Retry with the same card",
+    otherMethod: "Another payment method",
+    printProof: "Print proof",
+    rowDate: "Date",
+    rowMethod: "Payment method",
+    rowRef: "Reference",
+    rowReason: "Reason",
+    rowCode: "Code",
+    valCard: "Card",
+    valReason: "Declined by the issuer",
+    sentPrint: "Receipt sent to the printer",
+    sentEmail: "Receipt sent by email",
+    sentOther: "Choose SMS, WhatsApp or QR code",
+    sentProof: "Decline proof printed",
+    reasons: [
+      "Customer switched payment method",
+      "Wrong amount",
+      "Customer abandoned the purchase",
+      "Terminal error or incident"
+    ]
+  }
+};
+
+class Component extends DCLogic {
+  state = { screen: "tap", sheetVisible: false, method: null, reason: null, prev: "tap", channels: [], note: null, txn: null };
+  timers = [];
+
+  componentDidMount() { this.scheduleReveal(); }
+  componentWillUnmount() { this.clear(); }
+  componentDidUpdate(prev) {
+    if (prev.revealDelayMs !== this.props.revealDelayMs && this.state.screen === "tap" && !this.state.sheetVisible) {
+      this.clear();
+      this.scheduleReveal();
+    }
+  }
+
+  clear() { this.timers.forEach(clearTimeout); this.timers = []; }
+  after(ms, fn) { this.timers.push(setTimeout(fn, ms)); }
+  scheduleReveal() { this.after(this.props.revealDelayMs ?? 2000, () => this.setState({ sheetVisible: true })); }
+
+  settle() {
+    const ko = this.props.outcome === "ko";
+    const d = new Date();
+    const months = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+    const pad = (n) => String(n).padStart(2, "0");
+    const txn = {
+      date: d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear() + " \u00b7 " + pad(d.getHours()) + ":" + pad(d.getMinutes()),
+      ref: "#TRX" + String(100000 + Math.floor(Math.random() * 899999)),
+      last4: String(1000 + Math.floor(Math.random() * 8999))
+    };
+    this.setState({ screen: ko ? "declined" : "approved", txn, channels: [], note: null });
+    this.after(1900, () => this.setState({ screen: ko ? "koSummary" : "receipt" }));
+  }
+
+  runFlow(fromMs) {
+    this.after(fromMs, () => this.setState({ screen: "read" }));
+    this.after(fromMs + 1800, () => this.setState({ screen: "processing" }));
+    this.after(fromMs + 4300, () => this.settle());
+  }
+
+  tap = () => {
+    if (this.state.screen !== "tap") return;
+    this.clear();
+    this.setState({ screen: "reading" });
+    this.runFlow(1300);
+  };
+
+  pick = (label) => () => {
+    this.clear();
+    this.setState({ screen: "method", method: label });
+    if (this.props.autoApprove !== false) this.runFlow(3600);
+  };
+
+  askCancel = () => {
+    this.clear();
+    this.setState((s) => ({ screen: "reasons", prev: s.screen === "reasons" ? s.prev : s.screen }));
+  };
+
+  keepGoing = () => {
+    this.setState((s) => ({ screen: s.prev === "reasons" ? "tap" : s.prev }));
+    if (this.state.prev === "method" && this.props.autoApprove !== false) this.runFlow(3600);
+  };
+
+  chooseReason = (reason) => () => {
+    this.clear();
+    this.setState({ screen: "cancelled", reason });
+  };
+
+  restart = () => {
+    this.clear();
+    this.setState({ screen: "tap", sheetVisible: false, method: null, reason: null, prev: "tap", channels: [], note: null, txn: null });
+    this.scheduleReveal();
+  };
+
+  toggleChannel = (id, msg) => () => {
+    this.setState((s) => ({
+      channels: s.channels.indexOf(id) >= 0 ? s.channels.filter((c) => c !== id) : s.channels.concat([id]),
+      note: s.channels.indexOf(id) >= 0 ? null : msg
+    }));
+  };
+
+  retry = () => {
+    this.clear();
+    this.setState({ screen: "tap", sheetVisible: true, note: null, channels: [] });
+    this.runFlow(1300);
+  };
+
+  otherMethod = () => {
+    this.clear();
+    this.setState({ screen: "expanded", sheetVisible: true, note: null, channels: [] });
+  };
+
+  renderVals() {
+    const t = COPY[this.props.language === "en" ? "en" : "es"];
+    const s = this.state.screen;
+    const on = (id) => this.state.channels.indexOf(id) >= 0;
+    const ring = (id) => on(id)
+      ? "inset 0 0 0 3px rgb(7,37,80),0px 4px 4px 0px rgba(11,48,100,0.05)"
+      : "inset 0 0 0 1.26px rgb(231,236,245),0px 4px 4px 0px rgba(11,48,100,0.05)";
+    return {
+      t,
+      amount: this.props.amount ?? "1.000 \u20ac",
+      showTap: s === "tap" || s === "reading",
+      reading: s === "reading",
+      pulsing: (s === "tap" || s === "reading") && (this.props.waves !== false),
+      expanded: s === "expanded",
+      showMethod: s === "method",
+      showReasons: s === "reasons",
+      showCancelled: s === "cancelled",
+      showReceipt: s === "receipt",
+      showKoSummary: s === "koSummary",
+      showFlood: s === "read" || s === "processing" || s === "approved" || s === "declined",
+      phaseLive: s === "read" || s === "processing",
+      phaseRead: s === "read",
+      phaseProcessing: s === "processing",
+      phaseApproved: s === "approved",
+      phaseDeclined: s === "declined",
+      sheetVisible: this.state.sheetVisible,
+      methodLabel: this.state.method || "",
+      cancelReason: this.state.reason || "",
+      reasons: t.reasons.map((label) => ({ label, onPick: this.chooseReason(label) })),
+      onTap: this.tap,
+      onExpand: () => this.setState({ screen: "expanded" }),
+      onCollapse: () => this.setState({ screen: "tap", sheetVisible: true }),
+      onAskCancel: this.askCancel,
+      onKeepGoing: this.keepGoing,
+      onRestart: this.restart,
+      onNext: () => { if (typeof this.props.onDone === "function") this.props.onDone(); else this.restart(); },
+      onBizum: this.pick("Bizum"),
+      onMbway: this.pick("MB Way"),
+      onAlipay: this.pick("Alipay"),
+      onWero: this.pick("Wero"),
+      onTransfer: this.pick(t.transfer),
+      onMore: this.pick(t.moreLabel),
+      cardLine: t.valCard + " \u00b7\u00b7\u00b7\u00b7 " + (this.state.txn ? this.state.txn.last4 : "----"),
+      receiptRows: [
+        { label: t.rowDate, value: this.state.txn ? this.state.txn.date : "" },
+        { label: t.rowMethod, value: this.state.method || t.valCard },
+        { label: t.rowRef, value: this.state.txn ? this.state.txn.ref : "" }
+      ],
+      koRows: [
+        { label: t.rowDate, value: this.state.txn ? this.state.txn.date : "" },
+        { label: t.rowMethod, value: this.state.method || t.valCard },
+        { label: t.rowReason, value: t.valReason },
+        { label: t.rowCode, value: "05" }
+      ],
+      receiptNote: this.state.note,
+      printRing: ring("print"),
+      emailRing: ring("email"),
+      otherRing: ring("other"),
+      onPrint: this.toggleChannel("print", t.sentPrint),
+      onEmail: this.toggleChannel("email", t.sentEmail),
+      onOtherReceipt: this.toggleChannel("other", t.sentOther),
+      onRetry: this.retry,
+      onOtherMethod: this.otherMethod
+    };
+  }
+}
+</script>
+</body>
+</html>
